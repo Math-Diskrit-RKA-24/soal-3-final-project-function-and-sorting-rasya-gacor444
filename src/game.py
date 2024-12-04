@@ -6,12 +6,12 @@ def initPlayers():
 
 def createNewPlayer(name, damage=0, defensePower=0):
     return {
-        "name": name,
-        "score": 0,
-        "damage": damage,
-        "health": 100,
-        "defensePower": defensePower,
-        "defense": False
+        'name': name,
+        'score': 0,
+        'damage': damage,
+        'health': 100,
+        'defensePower': defensePower,
+        'defense': False
     }
 
 def addPlayer(player):
@@ -21,7 +21,7 @@ def addPlayer(player):
 def removePlayer(name):
     global PlayerList
     for player in PlayerList:
-        if player["name"] == name:
+        if player['name'] == name:
             PlayerList.remove(player)
             print(f'{name} keluar dari permainan')
             return
@@ -32,23 +32,23 @@ def setPlayer(player, key, value):
         player[key] = value
 
 def attackPlayer(attacker, target):
-    if target["defense"]:
-        damage = max(0, attacker["damage"] - target["defensePower"])
-        setPlayer(target, "defense", False)
-        score = round(attacker['score']+1-1/target['defensePower'],2)
+    if target['defense']:
+        damage = max(0, attacker['damage'] - target['defensePower'])
+        score = round(1 - (1 / target['defensePower']), 2)
+        setPlayer(target, 'defense', False)
     else:
-        damage = attacker["damage"]
+        damage = attacker['damage'] 
         score = 1
     
     # hit target
-    setPlayer(target, "health", max(0, target["health"] - damage))
+    setPlayer(target, 'health', target['health'] - damage)
     # tambah skor attacker
-    setPlayer(attacker, "score", attacker["score"] + score)
-        
+    setPlayer(attacker, 'score', attacker['score'] + score)
+
 
 def displayMatchResult():
     global PlayerList
-    sortPlayers = sorted(PlayerList, key=lambda p: (-p["score"], -p["health"]))
+    sortPlayers = sorted(PlayerList, key=lambda p: (-p['score'], -p['health']))
     
     for rank, player in enumerate(sortPlayers, start=1):
         print(f"Rank {rank}: {player['name']} | Score: {player['score']} | Health: {player['health']}")
