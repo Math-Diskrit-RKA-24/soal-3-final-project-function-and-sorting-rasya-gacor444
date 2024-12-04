@@ -23,7 +23,7 @@ def removePlayer(name):
     for player in PlayerList:
         if player['name'] == name:
             PlayerList.remove(player)
-            print(f'{name} keluar dari permainan')
+            print(f'{name} keluar dari permainan\n')
             return
     print('There is no player with that name!')
 
